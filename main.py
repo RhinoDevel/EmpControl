@@ -2,9 +2,17 @@
 import db
 
 def str_is_nonwhitespace(s):
-    """Return, if given parameter is a string that is neither empty, nor whitespace-only."""
+    """Is given argument a string that is neither empty, nor whitespace-only?
+    """
 
     return isinstance(s, str) and s and not s.isspace()
+
+def str_read_file(path):
+    """Return content of file at given path as string.
+    """
+
+    with open(path, 'r') as f:
+        return f.read()
 
 def test():
     #db.write("UPDATE Task SET Title='01a' WHERE Nr = 11;")
@@ -15,7 +23,6 @@ test()
 test()
 db.close()
 
-with open('dbinit.sql', 'r') as dbInitFile:
-    dbInit=dbInitFile.read()
+dbInit = str_read_file('dbinit.sql')
 
-#db.write(dbInit)
+print(dbInit)
