@@ -65,7 +65,7 @@ def write(query, params=None):
     conn.commit()
     cur.close()
 
-def read_all(query):
+def read_all(query, params=None):
     """Return all entries read.
     """
 
@@ -73,7 +73,7 @@ def read_all(query):
     conn = _get_conn()
     cur = conn.cursor()
 
-    cur.execute(query)
+    cur.execute(query, params)
     retVal = cur.fetchall()
     cur.close()
     return retVal
