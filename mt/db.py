@@ -35,15 +35,19 @@ def close():
 
     conn = None
 
-def write(query):
+def write(query, params=None):
     """Write to DB."""
+
+    ret_val = None
 
     conn = _get_conn()
     cur = conn.cursor()
 
-    cur.execute(query)
+    cur.execute(query, params)
+    ret_val = cur.fetchone()
     conn.commit()
     cur.close()
+    return ret_val
 
 def read_all(query):
     """Return all entries read."""
