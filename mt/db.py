@@ -13,7 +13,8 @@ password = "resutm"
 conn = None
 
 def _get_conn():
-    """Return connection to DB."""
+    """Return connection to DB.
+    """
 
     global conn, dbname, user, password
 
@@ -23,7 +24,8 @@ def _get_conn():
     return conn
 
 def close():
-    """Close global connection to DB, if open."""
+    """Close global connection to DB, if open.
+    """
 
     global conn
 
@@ -36,7 +38,8 @@ def close():
     conn = None
 
 def write_return(query, params=None):
-    """Write to DB, return result. """
+    """Write to DB, return result.
+    """
 
     ret_val = None
 
@@ -52,7 +55,8 @@ def write_return(query, params=None):
     return ret_val
 
 def write(query, params=None):
-    """Write to DB."""
+    """Write to DB.
+    """
 
     conn = _get_conn()
     cur = conn.cursor()
@@ -62,7 +66,8 @@ def write(query, params=None):
     cur.close()
 
 def read_all(query):
-    """Return all entries read."""
+    """Return all entries read.
+    """
 
     retVal = None
     conn = _get_conn()
