@@ -35,8 +35,8 @@ def close():
 
     conn = None
 
-def write(query, params=None):
-    """Write to DB."""
+def write_return(query, params=None):
+    """Write to DB, return result. """
 
     ret_val = None
 
@@ -44,10 +44,22 @@ def write(query, params=None):
     cur = conn.cursor()
 
     cur.execute(query, params)
+
     ret_val = cur.fetchone()
+
     conn.commit()
     cur.close()
     return ret_val
+
+def write(query, params=None):
+    """Write to DB."""
+
+    conn = _get_conn()
+    cur = conn.cursor()
+
+    cur.execute(query, params)
+    conn.commit()
+    cur.close()
 
 def read_all(query):
     """Return all entries read."""
