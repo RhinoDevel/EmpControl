@@ -17,7 +17,7 @@ def read_all():
 
 def read(nr):
     return _get_data(mt.db.read_all(
-        s_read_all+" WHERE Nr = "+str(nr))[0])
+        s_read_all+" WHERE Nr = %s", [ str(nr) ])[0])
 
 def create(data_without_nr):
     return mt.db.write_return(s_create, [ data_without_nr['title'] ])[0]
