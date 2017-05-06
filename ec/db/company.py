@@ -23,4 +23,4 @@ def create(data_without_nr):
     return mt.db.write_return(s_create, [ data_without_nr['title'] ])[0]
 
 def update(data):
-    return mt.db.write(s_update, [ data['title'], data['nr'] ])
+    mt.db.write(s_update, [ data['title'], data['nr'] ])
