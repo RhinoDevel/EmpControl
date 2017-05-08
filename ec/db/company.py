@@ -2,7 +2,7 @@
 import mt.db
 
 tablename = "company"
-s_read_all = "SELECT Nr, Title FROM "+tablename
+s_read_all = "SELECT Nr, Title FROM "+tablename+" ORDER BY Title"
 s_create = "INSERT INTO "+tablename+" (Title) VALUES (%s) RETURNING Nr"
 s_update = "UPDATE "+tablename+" SET Title = %s WHERE Nr = %s"
 
