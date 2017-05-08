@@ -1,6 +1,10 @@
 
 import collections
+import ec.db.company
 import ec.ui.console
+
+def _print():
+    print(ec.db.company.read_all())
 
 def menu():
     ec.ui.console.enter_menu(
@@ -10,7 +14,7 @@ def menu():
                     ("p",
                     {
                         "title": "Print",
-                        "func": None
+                        "func": _print
                     }),
                     ("c",
                     {
