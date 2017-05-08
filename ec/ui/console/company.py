@@ -9,26 +9,26 @@ def _print():
 def menu():
     ec.ui.console.enter_menu(
         {
-            "title": "MAIN",
-            "entries": collections.OrderedDict([
-                    ("p",
+            'title': 'MAIN',
+            'entries': collections.OrderedDict([
+                    ('p',
                     {
-                        "title": "Print",
-                        "func": _print
+                        'title': 'Print',
+                        'func': _print
                     }),
-                    ("c",
+                    ('c',
                     {
-                        "title": "Create",
-                        "func": None
+                        'title': 'Create',
+                        'func': None
                     }),
-                    ("m",
+                    ('m',
                     {
-                        "title": "Modify",
-                        "func": None
+                        'title': 'Modify',
+                        'func': None
                     }),
-                    ("d",
+                    ('d',
                     {
-                        "title": "Delete",
-                        "func": None
+                        'title': 'Delete',
+                        'func': None
                     })])
         })

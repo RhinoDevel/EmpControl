@@ -6,9 +6,9 @@
 #
 import psycopg2
 
-dbname = "mtdatabase"
-user = "mtuser"
-password = "resutm"
+dbname = 'mtdatabase'
+user = 'mtuser'
+password = 'resutm'
 #
 conn = None
 
@@ -19,7 +19,7 @@ def _get_conn():
     global conn, dbname, user, password
 
     if conn is None or conn.closed:
-        conn = psycopg2.connect("dbname="+dbname+" user="+user+" password="+password)
+        conn = psycopg2.connect('dbname='+dbname+' user='+user+' password='+password)
 
     return conn
 
