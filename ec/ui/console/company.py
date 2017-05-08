@@ -4,7 +4,13 @@ import ec.db.company
 import ec.ui.console
 
 def _print():
-    print(ec.db.company.read_all())
+    l = ec.db.company.read_all()
+    if not l:
+        print("No entries.")
+        return
+
+    for v in l:
+        print(v['title']) # Hard-coded
 
 def menu():
     ec.ui.console.enter_menu(
