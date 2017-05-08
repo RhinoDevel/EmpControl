@@ -1,2 +1,4 @@
 
-print("Nothing implemented, yet..")
+import ec.ui.console
+
+ec.ui.console.menu()
