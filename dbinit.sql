@@ -5,8 +5,8 @@
 CREATE TABLE Worker
 (
     Nr serial PRIMARY KEY,
-    Lastname text NOT NULL,
-    Firstname text NOT NULL,
+    Lastname text NOT NULL CHECK (Lastname <> ''),
+    Firstname text NOT NULL CHECK (Firstname <> ''),
     CONSTRAINT Worker_lastname_firstname UNIQUE (Lastname, Firstname)
 );
 CREATE TABLE Workday
@@ -22,19 +22,19 @@ CREATE TABLE Workday
 CREATE TABLE Tasktype
 (
     Nr serial PRIMARY KEY,
-    Title text NOT NULL UNIQUE
+    Title text NOT NULL UNIQUE CHECK (Title <> '')
 );
 CREATE TABLE Company
 (
     Nr serial PRIMARY KEY,
-    Title text NOT NULL UNIQUE
+    Title text NOT NULL UNIQUE CHECK (Title <> '')
 );
 CREATE TABLE Client
 (
     Nr serial PRIMARY KEY,
     Company_nr integer NOT NULL REFERENCES Company ON UPDATE RESTRICT ON DELETE RESTRICT,
-    Lastname text NOT NULL,
-    Firstname text NOT NULL,
+    Lastname text NOT NULL CHECK (Lastname <> ''),
+    Firstname text NOT NULL CHECK (Firstname <> ''),
     CONSTRAINT Client_lastname_firstname UNIQUE (Lastname, Firstname)
 );
 CREATE TABLE Task
@@ -44,5 +44,5 @@ CREATE TABLE Task
     Type_nr integer NOT NULL REFERENCES Tasktype ON UPDATE RESTRICT ON DELETE RESTRICT,
     Client_nr integer REFERENCES Client ON UPDATE RESTRICT ON DELETE RESTRICT,
     Lastedit_at timestamptz NOT NULL,
-    Description text NOT NULL
+    Description text NOT NULL CHECK (Description <> '')
 );
