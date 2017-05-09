@@ -1,5 +1,6 @@
 
 import collections
+import mt.str
 import ec.ui.console.company
 
 def enter_menu(data):
@@ -18,6 +19,19 @@ def enter_menu(data):
             data['entries'][s]['func']()
         else:
             print('Unknown command.')
+
+def create(data):
+    s = ''
+    d = {}
+    print('*** CREATE '+data['title']+' ****')
+    for k, v in data['entries'].items():
+        s = input(v+':'+' ')
+        if(not mt.str.is_nonwhitespace(s)):
+            print('Invalid input, skipping creation..')
+            return
+        d[k] = s
+    data['func'](d)
+    print('Entry created.')
 
 def menu():
     enter_menu(

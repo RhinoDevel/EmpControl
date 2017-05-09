@@ -12,6 +12,15 @@ def _print():
     for v in l:
         print(v['title']) # Hard-coded
 
+def _create():
+    ec.ui.console.create(
+        {
+            'title': 'COMPANY',
+            'entries': collections.OrderedDict([
+                ('title', 'Title')]),
+            'func': ec.db.company.create
+        })
+
 def menu():
     ec.ui.console.enter_menu(
         {
@@ -25,7 +34,7 @@ def menu():
                     ('c',
                     {
                         'title': 'Create',
-                        'func': None
+                        'func': _create
                     }),
                     ('m',
                     {
