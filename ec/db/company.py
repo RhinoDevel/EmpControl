@@ -20,7 +20,14 @@ def read(nr):
         s_read_all+' WHERE Nr = %s', [ str(nr) ])[0])
 
 def create(data_without_nr):
-    return mt.db.write_return(s_create, [ data_without_nr['title'] ])[0]
+    return mt.db.write_return(
+        s_create,
+        [ data_without_nr['title'].strip() ])[0]
 
 def update(data):
-    mt.db.write(s_update, [ data['title'], data['nr'] ])
+    mt.db.write(
+        s_update,
+        [
+            data['title'].strip(),
+            data['nr']
+        ])
