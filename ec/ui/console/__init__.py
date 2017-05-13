@@ -38,9 +38,9 @@ def menu():
         {
             'title': 'MAIN',
             'entries': collections.OrderedDict([
-                    ('c',
-                    {
-                        'title': 'Companies',
-                        'func': ec.ui.console.company.menu
-                    })])
+                ('c',
+                {
+                    'title': 'Companies',
+                    'func': ec.ui.console.company.menu
+                })])
         })
