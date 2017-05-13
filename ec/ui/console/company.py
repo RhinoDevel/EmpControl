@@ -9,8 +9,11 @@ def _print():
         print("No entries.")
         return
 
+    print('ID      '+' | '+'Title')
+    print('--------'+'---'+'--------')
     for v in l:
-        print(v['title']) # Hard-coded
+        print(v['id'], end=' | ')
+        print(v['title'])
 
 def _create():
     ec.ui.console.create(
@@ -26,24 +29,24 @@ def menu():
         {
             'title': 'MAIN',
             'entries': collections.OrderedDict([
-                    ('p',
-                    {
-                        'title': 'Print',
-                        'func': _print
-                    }),
-                    ('c',
-                    {
-                        'title': 'Create',
-                        'func': _create
-                    }),
-                    ('m',
-                    {
-                        'title': 'Modify',
-                        'func': None
-                    }),
-                    ('d',
-                    {
-                        'title': 'Delete',
-                        'func': None
-                    })])
+                ('p',
+                {
+                    'title': 'Print',
+                    'func': _print
+                }),
+                ('c',
+                {
+                    'title': 'Create',
+                    'func': _create
+                }),
+                ('m',
+                {
+                    'title': 'Modify',
+                    'func': None
+                }),
+                ('d',
+                {
+                    'title': 'Delete',
+                    'func': None
+                })])
         })
