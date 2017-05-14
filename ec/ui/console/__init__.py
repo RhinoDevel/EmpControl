@@ -34,6 +34,31 @@ def create(data):
     data['func'](d)
     print('Entry created.')
 
+def modify(data):
+    d = {}
+    e = None
+    s = ''
+
+    print('*** MODIFY '+data['title']+' ***')
+
+    d['id'] = input('Please enter ID: ')
+    if(not mt.str.is_nonwhitespace(d['id'])):
+        print('Invalid input, skipping modification..')
+        return
+    e = data['read'](d['id'])
+
+    for k, v in data['entries'].items():
+        s = input(v+' ["'+e[k]+'"]:'+' ')
+        if(not s):
+            s = e[k]
+        if(not mt.str.is_nonwhitespace(s)):
+            print('Invalid input, skipping modification..')
+            return
+        d[k] = s
+
+    data['modify'](d)
+    print('Entry modified.')
+
 def delete(data):
     s = ''
 
