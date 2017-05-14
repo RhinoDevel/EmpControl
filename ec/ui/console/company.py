@@ -24,6 +24,13 @@ def _create():
             'func': ec.db.company.create
         })
 
+def _delete():
+    ec.ui.console.delete(
+        {
+            'title': 'COMPANY',
+            'func': ec.db.company.delete_by_id
+        })
+
 def menu():
     ec.ui.console.enter_menu(
         {
@@ -47,6 +54,6 @@ def menu():
                 ('d',
                 {
                     'title': 'Delete',
-                    'func': None
+                    'func': _delete
                 })])
         })
