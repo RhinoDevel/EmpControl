@@ -24,6 +24,16 @@ def _create():
             'func': ec.db.company.create
         })
 
+def _modify():
+    ec.ui.console.modify(
+        {
+            'title': 'COMPANY',
+            'entries': collections.OrderedDict([
+                ('title', 'Title')]),
+            'read': ec.db.company.read_by_id,
+            'modify': ec.db.company.update_by_id
+        })
+
 def _delete():
     ec.ui.console.delete(
         {
@@ -49,7 +59,7 @@ def menu():
                 ('m',
                 {
                     'title': 'Modify',
-                    'func': None
+                    'func': _modify
                 }),
                 ('d',
                 {
