@@ -7,6 +7,7 @@ tablename = 'company'
 s_read_all = 'SELECT Nr, Id, Title FROM '+tablename+' ORDER BY Title'
 s_create = 'INSERT INTO '+tablename+' (Id, Title) VALUES (%s, %s) RETURNING Nr'
 s_update = 'UPDATE '+tablename+' SET Title = %s WHERE Nr = %s'
+s_delete_by_id = 'DELETE FROM '+tablename+' WHERE Id = %s'
 s_id_exists = 'SELECT COUNT(*) > 0 FROM '+tablename+' WHERE Id = %s'
 
 def _create_id():
@@ -47,3 +48,6 @@ def update(data):
             data['title'].strip(),
             data['nr']
         ])
+
+def delete_by_id(id):
+    mt.db.write(s_delete_by_id, [ id ])
