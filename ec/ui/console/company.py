@@ -44,7 +44,7 @@ def _delete():
 def menu():
     ec.ui.console.enter_menu(
         {
-            'title': 'MAIN',
+            'title': 'COMPANY',
             'entries': collections.OrderedDict([
                 ('p',
                 {
