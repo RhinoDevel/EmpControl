@@ -23,6 +23,7 @@ def enter_menu(data):
 def create(data):
     s = ''
     d = {}
+
     print('*** CREATE '+data['title']+' ****')
     for k, v in data['entries'].items():
         s = input(v+':'+' ')
@@ -32,6 +33,17 @@ def create(data):
         d[k] = s
     data['func'](d)
     print('Entry created.')
+
+def delete(data):
+    s = ''
+
+    print('*** DELETE '+data['title']+' ***')
+    s = input('Please enter ID: ')
+    if(not mt.str.is_nonwhitespace(s)):
+        print('Invalid input, skipping deletion..')
+        return
+    data['func'](s)
+    print('Entry deleted.')
 
 def menu():
     enter_menu(
