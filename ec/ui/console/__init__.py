@@ -7,12 +7,12 @@ def enter_menu(data):
     while True:
         s = ''
 
-        print('*** '+data['title']+' MENU ***')
+        print('*** ' + data['title'] + ' MENU ***')
         for k, v in data['entries'].items():
-            print(k+' '+v['title'])
-        print('X'+' '+'Exit')
+            print(k + ' ' + v['title'])
+        print('X' + ' ' + 'Exit')
 
-        s = input('Please select'+':'+' ')
+        s = input('Please select' + ':' + ' ')
         if s=='X':
             break
         if s in data['entries']:
@@ -24,9 +24,9 @@ def create(data):
     s = ''
     d = {}
 
-    print('*** CREATE '+data['title']+' ****')
+    print('*** CREATE ' + data['title'] + ' ****')
     for k, v in data['entries'].items():
-        s = input(v+':'+' ')
+        s = input(v + ':' + ' ')
         if(not mt.str.is_nonwhitespace(s)):
             print('Invalid input, skipping creation..')
             return
@@ -39,7 +39,7 @@ def modify(data):
     e = None
     s = ''
 
-    print('*** MODIFY '+data['title']+' ***')
+    print('*** MODIFY ' + data['title'] + ' ***')
 
     d['id'] = input('Please enter ID: ')
     if(not mt.str.is_nonwhitespace(d['id'])):
@@ -48,7 +48,7 @@ def modify(data):
     e = data['read'](d['id'])
 
     for k, v in data['entries'].items():
-        s = input(v+' ["'+e[k]+'"]:'+' ')
+        s = input(v + ' ["' + e[k] + '"]:' + ' ')
         if(not s):
             s = e[k]
         if(not mt.str.is_nonwhitespace(s)):
@@ -62,7 +62,7 @@ def modify(data):
 def delete(data):
     s = ''
 
-    print('*** DELETE '+data['title']+' ***')
+    print('*** DELETE ' + data['title'] + ' ***')
     s = input('Please enter ID: ')
     if(not mt.str.is_nonwhitespace(s)):
         print('Invalid input, skipping deletion..')

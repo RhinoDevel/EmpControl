@@ -6,11 +6,11 @@ import ec.ui.console
 def _print():
     l = ec.db.company.read_all()
     if not l:
-        print("No entries.")
+        print('No entries.')
         return
 
-    print('ID      '+' | '+'Title')
-    print('--------'+'---'+'--------')
+    print('ID      ' + ' | ' + 'Title')
+    print('--------' + '---' + '--------')
     for v in l:
         print(v['id'], end=' | ')
         print(v['title'])
