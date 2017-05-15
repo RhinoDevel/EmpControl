@@ -1,8 +1,8 @@
 
 import secrets
 import mt.db
+import ec.db
 
-id_byte_len = 4
 tablename = 'company'
 s_read_all = 'SELECT Nr, Id, Title FROM '+tablename+' ORDER BY Title'
 s_create = 'INSERT INTO '+tablename+' (Id, Title) VALUES (%s, %s) RETURNING Nr'
@@ -12,13 +12,7 @@ s_delete_by_id = 'DELETE FROM '+tablename+' WHERE Id = %s'
 s_id_exists = 'SELECT COUNT(*) > 0 FROM '+tablename+' WHERE Id = %s'
 
 def _create_id():
-    ret_val = None
-
-    while True:
-        ret_val = secrets.token_hex(id_byte_len)
-        if not mt.db.read_all(s_id_exists, [ ret_val ])[0][0]:
-            break
-    return ret_val
+    return ec.db.create_id(tablename)
 
 def _get_data(row):
     return {
