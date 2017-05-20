@@ -2,6 +2,7 @@
 import collections
 import mt.str
 import ec.ui.console.company
+import ec.ui.console.client
 
 def enter_menu(data):
     while True:
@@ -79,5 +80,10 @@ def menu():
                 {
                     'title': 'Companies',
                     'func': ec.ui.console.company.menu
+                }),
+                ('l',
+                {
+                    'title': 'Clients',
+                    'func': ec.ui.console.client.menu
                 })])
         })
