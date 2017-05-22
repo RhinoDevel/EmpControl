@@ -4,6 +4,7 @@ import mt.str
 import ec.ui.console.company
 import ec.ui.console.client
 import ec.ui.console.worker
+import ec.ui.console.tasktype
 
 def enter_menu(data):
     while True:
@@ -91,5 +92,10 @@ def menu():
                 {
                     'title': 'Workers',
                     'func': ec.ui.console.worker.menu
+                }),
+                ('a',
+                {
+                    'title': 'Task types',
+                    'func': ec.ui.console.tasktype.menu
                 })])
         })
