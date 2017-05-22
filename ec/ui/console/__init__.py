@@ -5,6 +5,7 @@ import ec.ui.console.company
 import ec.ui.console.client
 import ec.ui.console.worker
 import ec.ui.console.tasktype
+import ec.ui.console.workday
 
 def enter_menu(data):
     while True:
@@ -97,5 +98,10 @@ def menu():
                 {
                     'title': 'Task types',
                     'func': ec.ui.console.tasktype.menu
+                }),
+                ('o',
+                {
+                    'title': 'Workdays',
+                    'func': ec.ui.console.workday.menu
                 })])
         })
