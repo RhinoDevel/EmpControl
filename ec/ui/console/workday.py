@@ -13,7 +13,7 @@ def _print():
 
     print('ID      ' + ' | ' + 'Worker ID' + ' | ' + 'Begin at                 ' + ' | ' + 'End at                   ' + ' | ' + 'Break' + ', ' + 'Vacation' + ', ' + 'Sick ')
     print('--------' + '---' + '---------' + '---' + '-------------------------' + '---' + '-------------------------' + '---')
-    for v in l: # TODO: Fix end strings!
+    for v in l:
         print(v['id'], end=' | ')
         print(v['worker_id'], end='  | ')
         print(str(v['begin_at']), end=' | ')
