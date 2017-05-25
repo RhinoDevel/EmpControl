@@ -67,6 +67,9 @@ def create(data):
     No client nr. in given data, but client ID.
     """
 
+    if not _is_valid_input(data):
+        raise ValueError('Invalid data given!')
+
     workday_nr = ec.db.workday.read_nr(data['workday_id'])
     type_nr = ec.db.tasktype.read_nr(data['type_id'])
     client_nr = ec.db.client.read_nr(data['client_id'])
@@ -89,6 +92,9 @@ def update_by_id(data):
     No (task-)type nr. in given data, but (task-)type ID.
     No client nr. in given data, but client ID.
     """
+
+    if not _is_valid_input(data):
+        raise ValueError('Invalid data given!')
 
     workday_nr = ec.db.workday.read_nr(data['workday_id'])
     type_nr = ec.db.tasktype.read_nr(data['type_id'])
