@@ -4,7 +4,7 @@ from datetime import datetime
 import mt.db
 import ec.db
 import ec.db.workday
-import ec.db.Tasktype
+import ec.db.tasktype
 import ec.db.client
 
 tablename = 'task'
@@ -39,6 +39,13 @@ def _get_data(row):
         'description': row[6]
     }
 
+def _is_valid_input(data):
+    """Check stuff the DB does not."""
+
+    # Is workday entry really a WORK day?
+
+    return True # TODO: Implement and use!
+
 def read_nr(i):
     return ec.db.read_nr(i, tablename)
 
@@ -71,7 +78,7 @@ def create(data):
             workday_nr,
             type_nr,
             client_nr,
-            datetime.datetime.now(),
+            datetime.now(),
             data['description'].strip()
         ])[0]
 
@@ -93,8 +100,9 @@ def update_by_id(data):
             workday_nr,
             type_nr,
             client_nr,
-            datetime.datetime.now(),
-            data['description'].strip()
+            datetime.now(),
+            data['description'].strip(),
+            data['id'].strip()
         ])
 
 def delete_by_id(i):
