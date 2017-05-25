@@ -1,5 +1,5 @@
 # EmpControl
-Log your workday and tasks done.
+Logs your workday and tasks done for your clients.
 
 Log your workday:
 
