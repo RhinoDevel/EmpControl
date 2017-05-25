@@ -89,6 +89,9 @@ def create(data):
     No worker nr. in given data, but worker ID.
     """
 
+    if not _is_valid_input(data):
+        raise ValueError('Invalid data given!')
+
     worker_nr = ec.db.worker.read_nr(data['worker_id'])
 
     return mt.db.write_return(
@@ -108,6 +111,9 @@ def update_by_id(data):
 
     No worker nr. in given data, but worker ID.
     """
+
+    if not _is_valid_input(data):
+        raise ValueError('Invalid data given!')
 
     worker_nr = ec.db.worker.read_nr(data['worker_id'])
 
