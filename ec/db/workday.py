@@ -33,6 +33,43 @@ def _get_data(row):
         'sick': row[7]
     }
 
+def _is_valid_input(data):
+    """Check stuff the DB does not."""
+
+    # Workday
+    #
+    # - Begin_at not NULL
+    # - End_at not NULL and later than begin_at
+    # - End_at-Begin_at greater than Break+1 (at least one minute before and after break)
+    # - Vacation False
+    # - Sick False
+
+    # Vacation day
+    #
+    # - Begin_at time is 00:00
+    # - End_at is NULL
+    # - Break is 0
+    # - Vacation True
+    # - Sick False
+
+    # Sick day
+    #
+    # Like vacation day, but with vacation and sick values swapped.
+
+    # Workday with some vacation time
+    #
+    # Like workday, but with vacation True.
+
+    # Workday with some sick time
+    #
+    # Like workday, but with sick True.
+
+    # Sick vacation day
+    #
+    # Like vacation day, but also with sick True.
+
+    return True # TODO: Implement!
+
 def read_nr(i):
     return ec.db.read_nr(i, tablename)
 
