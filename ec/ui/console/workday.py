@@ -4,6 +4,7 @@ from datetime import datetime
 from datetime import timedelta
 import ec.db.workday
 import ec.ui.console
+import mt.str
 
 def _print():
     l = ec.db.workday.read_all()
@@ -22,7 +23,7 @@ def _print():
         print(str(v['vacation']), end=', ')
         print(v['sick'])
 
-def _convert(data):
+def _convert_from_str(data):
     data['begin_at'] = datetime.strptime(data['begin_at'], '%Y-%m-%d %H:%M')
     data['end_at'] = datetime.strptime(data['end_at'], '%Y-%m-%d %H:%M')
     data['break'] = timedelta(minutes=int(data['break']))
@@ -31,11 +32,23 @@ def _convert(data):
 
     return data
 
+def _convert_to_str(data):
+    data['begin_at'] = data['begin_at'].strftime('%Y-%m-%d %H:%M')
+    data['end_at'] = data['end_at'].strftime('%Y-%m-%d %H:%M')
+    data['break'] = str(int(data['break'].seconds/60.0))
+    data['vacation'] = 'y' if data['vacation'] else 'n'
+    data['sick'] = 'y' if data['sick'] else 'n'
+
 def _db_create_convert(data):
-    ec.db.workday.create(_convert(data))
+    ec.db.workday.create(_convert_from_str(data))
 
 def _db_modify_convert(data):
-    ec.db.workday.update_by_id(_convert(data))
+    ec.db.workday.update_by_id(_convert_from_str(data))
+
+def _db_read_by_id_convert(i):
+    data = ec.db.workday.read_by_id(i)
+    _convert_to_str(data)
+    return data
 
 def _create():
     ec.ui.console.create(
@@ -52,7 +65,19 @@ def _create():
         })
 
 def _modify():
-    return # TODO: Implement!
+    ec.ui.console.modify(
+        {
+            'title': 'WORKDAY',
+            'entries': collections.OrderedDict([
+                ('worker_id', 'Worker ID'),
+                ('begin_at', 'Begin at'),
+                ('end_at', 'End at'),
+                ('break', 'Break'),
+                ('vacation', 'Vacation'),
+                ('sick', 'Sick')]),
+            'read': _db_read_by_id_convert,
+            'modify': _db_modify_convert
+        })
 
 def _delete():
     ec.ui.console.delete(
