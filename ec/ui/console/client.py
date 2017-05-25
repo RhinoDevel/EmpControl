@@ -9,10 +9,10 @@ def _print():
         print('No entries.')
         return
 
-    print('ID        ' + ' | ' + 'Company ID' + ' | ' + 'Lastname' + ', ' + 'Firstname')
-    print('----------' + '---' + '----------' + '---')
+    print('ID      ' + ' | ' + 'Company ID' + ' | ' + 'Lastname' + ', ' + 'Firstname')
+    print('--------' + '---' + '----------' + '---')
     for v in l:
-        print(v['id'], end='   | ')
+        print(v['id'], end=' | ')
         print(v['company_id'], end='   | ')
         print(v['lastname'], end=', ')
         print(v['firstname'])
