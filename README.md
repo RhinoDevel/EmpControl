@@ -33,5 +33,5 @@ DONE:
 TO-DO:
 
 - GUI for production
-- user handling (let each worker login and handle his/her own data).
+- user handling (let each worker login and handle his/her own data)
 - tools to analyze/evaluate entered data (work hours per week, sick days per month, etc.)
