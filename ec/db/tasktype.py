@@ -4,10 +4,14 @@ import mt.db
 import ec.db
 
 tablename = 'tasktype'
-s_read_all = 'SELECT Nr, Id, Title FROM ' + tablename + ' ORDER BY Title'
-s_create = 'INSERT INTO ' + tablename + ' (Id, Title) VALUES (%s, %s) RETURNING Nr'
-s_read_by_id = 'SELECT Nr, Id, Title FROM ' + tablename + ' WHERE Id = %s'
-s_update_by_id = 'UPDATE ' + tablename + ' SET Title = %s WHERE Id = %s'
+s_read_all = ('SELECT Nr, Id, Title FROM '
+             + tablename + ' ORDER BY Title')
+s_create = ('INSERT INTO ' + tablename
+           + ' (Id, Title) VALUES (%s, %s) RETURNING Nr')
+s_read_by_id = ('SELECT Nr, Id, Title FROM '
+               + tablename + ' WHERE Id = %s')
+s_update_by_id = ('UPDATE ' + tablename
+                 + ' SET Title = %s WHERE Id = %s')
 s_delete_by_id = 'DELETE FROM ' + tablename + ' WHERE Id = %s'
 
 def _create_id():

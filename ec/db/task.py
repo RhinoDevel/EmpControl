@@ -8,10 +8,20 @@ import ec.db.tasktype
 import ec.db.client
 
 tablename = 'task'
-s_read_all = 'SELECT Nr, Id, Workday_nr, Type_nr, Client_nr, Lastedit_at, Description FROM ' + tablename + ' ORDER BY Workday_nr, Description'
-s_create = 'INSERT INTO ' + tablename + ' (Id, Workday_nr, Type_nr, Client_nr, Lastedit_at, Description)' + ' VALUES (%s, %s, %s, %s, %s, %s) RETURNING Nr'
-s_read_by_id = 'SELECT Nr, Id, Workday_nr, Type_nr, Client_nr, Lastedit_at, Description FROM ' + tablename + ' WHERE Id = %s'
-s_update_by_id = 'UPDATE ' + tablename + ' SET Workday_nr = %s, Type_nr = %s, Client_nr = %s, Lastedit_at = %s, Description = %s' + ' WHERE Id = %s'
+s_read_all = ('SELECT Nr, Id, Workday_nr, Type_nr, Client_nr'
+             + ', Lastedit_at, Description FROM ' + tablename
+             + ' ORDER BY Workday_nr, Description')
+s_create = ('INSERT INTO ' + tablename
+           + ' (Id, Workday_nr, Type_nr, Client_nr, Lastedit_at'
+           + ', Description)'
+           + ' VALUES (%s, %s, %s, %s, %s, %s) RETURNING Nr')
+s_read_by_id = ('SELECT Nr, Id, Workday_nr, Type_nr, Client_nr'
+               +', Lastedit_at, Description FROM ' + tablename
+               + ' WHERE Id = %s')
+s_update_by_id = ('UPDATE ' + tablename
+                 + ' SET Workday_nr = %s, Type_nr = %s'
+                 + ', Client_nr = %s, Lastedit_at = %s'
+                 + ', Description = %s' + ' WHERE Id = %s')
 s_delete_by_id = 'DELETE FROM ' + tablename + ' WHERE Id = %s'
 
 def _create_id():

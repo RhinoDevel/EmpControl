@@ -4,10 +4,14 @@ import mt.db
 import ec.db
 
 tablename = 'worker'
-s_read_all = 'SELECT Nr, Id, Lastname, Firstname FROM ' + tablename + ' ORDER BY Lastname, Firstname'
-s_create = 'INSERT INTO ' + tablename + ' (Id, Lastname, Firstname) VALUES (%s, %s, %s) RETURNING Nr'
-s_read_by_id = 'SELECT Nr, Id, Lastname, Firstname FROM ' + tablename + ' WHERE Id = %s'
-s_update_by_id = 'UPDATE ' + tablename + ' SET Lastname = %s, Firstname = %s WHERE Id = %s'
+s_read_all = ('SELECT Nr, Id, Lastname, Firstname FROM '
+             + tablename + ' ORDER BY Lastname, Firstname')
+s_create = ('INSERT INTO ' + tablename
+           + ' (Id, Lastname, Firstname) VALUES (%s, %s, %s) RETURNING Nr')
+s_read_by_id = ('SELECT Nr, Id, Lastname, Firstname FROM '
+            + tablename + ' WHERE Id = %s')
+s_update_by_id = ('UPDATE ' + tablename
+                 + ' SET Lastname = %s, Firstname = %s WHERE Id = %s')
 s_delete_by_id = 'DELETE FROM ' + tablename + ' WHERE Id = %s'
 
 def _create_id():

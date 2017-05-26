@@ -5,10 +5,16 @@ import ec.db
 import ec.db.company
 
 tablename = 'client'
-s_read_all = 'SELECT Nr, Id, Company_nr, Lastname, Firstname FROM ' + tablename + ' ORDER BY Lastname, Firstname'
-s_create = 'INSERT INTO ' + tablename + ' (Id, Company_nr, Lastname, Firstname)' + ' VALUES (%s, %s, %s, %s) RETURNING Nr'
-s_read_by_id = 'SELECT Nr, Id, Company_nr, Lastname, Firstname FROM ' + tablename + ' WHERE Id = %s'
-s_update_by_id = 'UPDATE ' + tablename + ' SET Company_nr = %s, Lastname = %s, Firstname = %s' + ' WHERE Id = %s'
+s_read_all = ('SELECT Nr, Id, Company_nr, Lastname, Firstname FROM '
+             + tablename + ' ORDER BY Lastname, Firstname')
+s_create = ('INSERT INTO ' + tablename
+           + ' (Id, Company_nr, Lastname, Firstname)'
+           + ' VALUES (%s, %s, %s, %s) RETURNING Nr')
+s_read_by_id = ('SELECT Nr, Id, Company_nr, Lastname, Firstname FROM '
+               + tablename + ' WHERE Id = %s')
+s_update_by_id = ('UPDATE ' + tablename +
+                 ' SET Company_nr = %s, Lastname = %s, Firstname = %s'
+                 + ' WHERE Id = %s')
 s_delete_by_id = 'DELETE FROM ' + tablename + ' WHERE Id = %s'
 
 def _create_id():
