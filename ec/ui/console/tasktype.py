@@ -3,6 +3,8 @@ import collections
 import ec.db.tasktype
 import ec.ui.console
 
+menu_title = 'TASK TYPE'
+
 def _print():
     l = ec.db.tasktype.read_all()
     if not l:
@@ -18,7 +20,7 @@ def _print():
 def _create():
     ec.ui.console.create(
         {
-            'title': 'TASKTYPE',
+            'title': menu_title,
             'entries': collections.OrderedDict([
                 ('title', 'Title')]),
             'func': ec.db.tasktype.create
@@ -27,7 +29,7 @@ def _create():
 def _modify():
     ec.ui.console.modify(
         {
-            'title': 'TASKTYPE',
+            'title': menu_title,
             'entries': collections.OrderedDict([
                 ('title', 'Title')]),
             'read': ec.db.tasktype.read_by_id,
@@ -37,14 +39,14 @@ def _modify():
 def _delete():
     ec.ui.console.delete(
         {
-            'title': 'TASKTYPE',
+            'title': menu_title,
             'func': ec.db.tasktype.delete_by_id
         })
 
 def menu():
     ec.ui.console.enter_menu(
         {
-            'title': 'TASKTYPE',
+            'title': menu_title,
             'entries': collections.OrderedDict([
                 ('p',
                 {

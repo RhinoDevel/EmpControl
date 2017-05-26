@@ -3,6 +3,8 @@ import collections
 import ec.db.task
 import ec.ui.console
 
+menu_title = 'TASK'
+
 def _print():
     l = ec.db.task.read_all()
     if not l:
@@ -22,7 +24,7 @@ def _print():
 def _create():
     ec.ui.console.create(
         {
-            'title': 'TASK',
+            'title': menu_title,
             'entries': collections.OrderedDict([
                 ('workday_id', 'Workday ID'),
                 ('type_id', 'Type ID'),
@@ -34,7 +36,7 @@ def _create():
 def _modify():
     ec.ui.console.modify(
         {
-            'title': 'TASK',
+            'title': menu_title,
             'entries': collections.OrderedDict([
                 ('workday_id', 'Workday ID'),
                 ('type_id', 'Type ID'),
@@ -47,14 +49,14 @@ def _modify():
 def _delete():
     ec.ui.console.delete(
         {
-            'title': 'TASK',
+            'title': menu_title,
             'func': ec.db.task.delete_by_id
         })
 
 def menu():
     ec.ui.console.enter_menu(
         {
-            'title': 'TASK',
+            'title': menu_title,
             'entries': collections.OrderedDict([
                 ('p',
                 {

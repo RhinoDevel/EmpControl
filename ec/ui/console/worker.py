@@ -3,6 +3,8 @@ import collections
 import ec.db.worker
 import ec.ui.console
 
+menu_title = 'WORKER'
+
 def _print():
     l = ec.db.worker.read_all()
     if not l:
@@ -19,7 +21,7 @@ def _print():
 def _create():
     ec.ui.console.create(
         {
-            'title': 'WORKER',
+            'title': menu_title,
             'entries': collections.OrderedDict([
                 ('lastname', 'Lastname'),
                 ('firstname', 'Firstname')]),
@@ -29,7 +31,7 @@ def _create():
 def _modify():
     ec.ui.console.modify(
         {
-            'title': 'WORKER',
+            'title': menu_title,
             'entries': collections.OrderedDict([
                 ('lastname', 'Lastname'),
                 ('firstname', 'Firstname')]),
@@ -40,14 +42,14 @@ def _modify():
 def _delete():
     ec.ui.console.delete(
         {
-            'title': 'WORKER',
+            'title': menu_title,
             'func': ec.db.worker.delete_by_id
         })
 
 def menu():
     ec.ui.console.enter_menu(
         {
-            'title': 'WORKER',
+            'title': menu_title,
             'entries': collections.OrderedDict([
                 ('p',
                 {

@@ -6,6 +6,8 @@ import ec.db.workday
 import ec.ui.console
 import mt.str
 
+menu_title = 'WORKDAY'
+
 def _print():
     l = ec.db.workday.read_all()
     if not l:
@@ -65,7 +67,7 @@ def _db_read_by_id_convert(i):
 def _create():
     ec.ui.console.create(
         {
-            'title': 'WORKDAY',
+            'title': menu_title,
             'entries': collections.OrderedDict([
                 ('worker_id', 'Worker ID'),
                 ('begin_at', 'Begin at'),
@@ -79,7 +81,7 @@ def _create():
 def _modify():
     ec.ui.console.modify(
         {
-            'title': 'WORKDAY',
+            'title': menu_title,
             'entries': collections.OrderedDict([
                 ('worker_id', 'Worker ID'),
                 ('begin_at', 'Begin at'),
@@ -94,14 +96,14 @@ def _modify():
 def _delete():
     ec.ui.console.delete(
         {
-            'title': 'WORKDAY',
+            'title': menu_title,
             'func': ec.db.workday.delete_by_id
         })
 
 def menu():
     ec.ui.console.enter_menu(
         {
-            'title': 'WORKDAY',
+            'title': menu_title,
             'entries': collections.OrderedDict([
                 ('p',
                 {

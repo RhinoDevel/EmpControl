@@ -3,6 +3,8 @@ import collections
 import ec.db.client
 import ec.ui.console
 
+menu_title = 'CLIENT'
+
 def _print():
     l = ec.db.client.read_all()
     if not l:
@@ -20,7 +22,7 @@ def _print():
 def _create():
     ec.ui.console.create(
         {
-            'title': 'CLIENT',
+            'title': menu_title,
             'entries': collections.OrderedDict([
                 ('company_id', 'Company ID'),
                 ('lastname', 'Lastname'),
@@ -31,7 +33,7 @@ def _create():
 def _modify():
     ec.ui.console.modify(
         {
-            'title': 'CLIENT',
+            'title': menu_title,
             'entries': collections.OrderedDict([
                 ('company_id', 'Company ID'),
                 ('lastname', 'Lastname'),
@@ -43,14 +45,14 @@ def _modify():
 def _delete():
     ec.ui.console.delete(
         {
-            'title': 'CLIENT',
+            'title': menu_title,
             'func': ec.db.client.delete_by_id
         })
 
 def menu():
     ec.ui.console.enter_menu(
         {
-            'title': 'CLIENT',
+            'title': menu_title,
             'entries': collections.OrderedDict([
                 ('p',
                 {
