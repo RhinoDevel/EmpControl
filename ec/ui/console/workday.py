@@ -7,6 +7,7 @@ import ec.ui.console
 import mt.str
 
 menu_title = 'WORKDAY'
+datetime_fmt = '%Y-%m-%d %H:%M'
 
 def _print():
     l = ec.db.workday.read_all()
@@ -29,11 +30,11 @@ def _convert_from_str(data):
     if data['begin_at']=='-':
         data['begin_at'] = None
     else:
-        data['begin_at'] = datetime.strptime(data['begin_at'], '%Y-%m-%d %H:%M')
+        data['begin_at'] = datetime.strptime(data['begin_at'], datetime_fmt)
     if data['end_at']=='-':
         data['end_at'] = None
     else:
-        data['end_at'] = datetime.strptime(data['end_at'], '%Y-%m-%d %H:%M')
+        data['end_at'] = datetime.strptime(data['end_at'], datetime_fmt)
     data['break'] = timedelta(minutes=int(data['break']))
     data['vacation'] = data['vacation']=='y'
     data['sick'] = data['sick']=='y'
@@ -44,11 +45,11 @@ def _convert_to_str(data):
     if data['begin_at'] is None:
         data['begin_at'] = '-'
     else:
-        data['begin_at'] = data['begin_at'].strftime('%Y-%m-%d %H:%M')
+        data['begin_at'] = data['begin_at'].strftime(datetime_fmt)
     if data['end_at'] is None:
         data['end_at'] = '-'
     else:
-        data['end_at'] = data['end_at'].strftime('%Y-%m-%d %H:%M')
+        data['end_at'] = data['end_at'].strftime(datetime_fmt)
     data['break'] = str(int(data['break'].seconds/60.0))
     data['vacation'] = 'y' if data['vacation'] else 'n'
     data['sick'] = 'y' if data['sick'] else 'n'
