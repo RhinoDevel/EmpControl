@@ -51,7 +51,7 @@ def menu():
     mt.tk.table.create({
             'on_select': _on_select,#None,
             'frame': nb_worker,
-            'sel_id': 34567890',#'',
+            'sel_id': '34567890',#'',
             'titles': ['Lastname', 'Firstname'],
             'entries': collections.OrderedDict([
                 ('12345678', [ 'Müller', 'Hans-Werner' ]),
