@@ -20,10 +20,13 @@ def _select_row(o, r):
         for col_ele in row_eles:
              col_ele.configure(background=bg_col)
 
+def _select_wo_call(o, i, r):
+    _select_row(o, r)
+    o['sel_id'] = i
+
 def _select_if_not(o, i, r):
     if i!=o['sel_id']:
-        _select_row(o, r)
-        o['sel_id'] = i
+        _select_wo_call(o, i, r)
         if callable(o['on_select']):
             o['on_select'](i)
 
@@ -59,7 +62,7 @@ def create(p):
         'frame': ttk.Frame(p['frame']),
         'on_select': p['on_select'],
         'ele': [],
-        'sel_id': ''
+        'sel_id': p['sel_id']
     }
 
     o['frame'].grid(
@@ -70,13 +73,18 @@ def create(p):
         sticky=(ti.N, ti.S, ti.W, ti.E))
 
     row = 0
+    sel_row = -1
 
     _add_row(o, row, None, p['titles'], True)
     row = row+1
 
     for k, v in p['entries'].items():
         _add_row(o, row, k, v, False)
+        if k==o['sel_id']:
+            sel_row = row # It would be possible to do without this..
         row = row+1
+        
+    _select_wo_call(o, o['sel_id'], sel_row)
 
     ttk.Style().configure('MT.TFrame', background=col_bg_table)
     o['frame'].configure(style='MT.TFrame')
