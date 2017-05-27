@@ -1,3 +1,5 @@
 mt/__pycache__
+mt/tk/__pycache__
 ec/db/__pycache__
 ec/ui/console/__pycache__
+ec/ui/tk/__pycache__
