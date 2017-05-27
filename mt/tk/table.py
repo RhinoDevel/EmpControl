@@ -9,6 +9,8 @@ col_bg_table = ''
 col_bg_row_deselected = ''
 col_bg_row_selected = 'yellow'
 
+# TODO: Implement scrolling.
+
 def _select_row(o, r):
     logging.debug('Selecting row at index '+str(r)+'..')
 
@@ -83,8 +85,9 @@ def create(p):
         if k==o['sel_id']:
             sel_row = row # It would be possible to do without this..
         row = row+1
-        
-    _select_wo_call(o, o['sel_id'], sel_row)
+
+    if sel_row!=-1:
+        _select_wo_call(o, o['sel_id'], sel_row)
 
     ttk.Style().configure('MT.TFrame', background=col_bg_table)
     o['frame'].configure(style='MT.TFrame')
