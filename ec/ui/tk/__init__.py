@@ -1,20 +1,24 @@
 
+import logging
+import collections
 import tkinter as ti
 from tkinter import ttk
-import collections
 
 import mt.tk.table
+
+def _on_select(i):
+    logging.debug('Table entry with ID "'+i+'" was selected.')
 
 def menu():
     root = None
     mainframe = None
     nb = None
     nb_company = None
-    nb_clients = None
-    nb_workers = None
-    nb_tasktypes = None
-    nb_workdays = None
-    nb_tasks = None
+    nb_client = None
+    nb_worker = None
+    nb_tasktype = None
+    nb_workday = None
+    nb_task = None
 
     root = ti.Tk()
     root.title('EmpControl')
@@ -31,26 +35,27 @@ def menu():
 
     nb_company = ttk.Frame(nb)
     nb.add(nb_company, text='Companies')
-    nb_clients = ttk.Frame(nb)
-    nb.add(nb_clients, text='Clients')
-    nb_workers = ttk.Frame(nb)
-    nb.add(nb_workers, text='Workers')
-    nb_tasktypes = ttk.Frame(nb)
-    nb.add(nb_tasktypes, text='Task Types')
-    nb_workdays = ttk.Frame(nb)
-    nb.add(nb_workdays, text='Workdays')
-    nb_tasks = ttk.Frame(nb)
-    nb.add(nb_tasks, text='Tasks')
+    nb_client = ttk.Frame(nb)
+    nb.add(nb_client, text='Clients')
+    nb_worker = ttk.Frame(nb)
+    nb.add(nb_worker, text='Workers')
+    nb_tasktype = ttk.Frame(nb)
+    nb.add(nb_tasktype, text='Task Types')
+    nb_workday = ttk.Frame(nb)
+    nb.add(nb_workday, text='Workdays')
+    nb_task = ttk.Frame(nb)
+    nb.add(nb_task, text='Tasks')
 
-    nb_company.columnconfigure(0, weight=1)
-    nb_company.rowconfigure(0, weight=1)
+    nb_worker.columnconfigure(0, weight=1)
+    nb_worker.rowconfigure(0, weight=1)
     mt.tk.table.create({
-            'frame': nb_company,
-            'titles': ['Company ID', 'Title'],
-            'entries': [
-                ['12345678', 'Beerbarrèltree Brothers'],
-                ['23456789', 'Mästermind Ltd.'],
-                ['34567890', 'Fish-For-Br€akfast']],
+            'on_select': _on_select,
+            'frame': nb_worker,
+            'titles': ['Lastname', 'Firstname'],
+            'entries': collections.OrderedDict([
+                ('12345678', [ 'Müller', 'Hans-Werner' ]),
+                ('23456789', [ 'Niemandt', 'Agnés' ]),
+                ('34567890', [ 'Steinkopf', 'Svenjä' ])])
         })
 
     root.mainloop()
