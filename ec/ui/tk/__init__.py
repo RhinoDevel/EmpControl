@@ -4,10 +4,9 @@ import collections
 import tkinter as ti
 from tkinter import ttk
 
-import mt.tk.table
-
-def _on_select(i):
-    logging.debug('Table entry with ID "'+i+'" was selected.')
+import ec.ui.tk.company
+import ec.ui.tk.client
+import ec.ui.tk.worker
 
 def menu():
     root = None
@@ -18,7 +17,6 @@ def menu():
     nb_worker = None
     nb_tasktype = None
     nb_workday = None
-    nb_task = None
 
     root = ti.Tk()
     root.title('EmpControl')
@@ -33,32 +31,14 @@ def menu():
     nb = ttk.Notebook(mainframe)
     nb.grid(column=0, row=0, padx=5, pady=5, sticky=(ti.N, ti.S, ti.W, ti.E))
 
-    nb_company = ttk.Frame(nb)
-    nb.add(nb_company, text='Companies')
-    nb_client = ttk.Frame(nb)
-    nb.add(nb_client, text='Clients')
-    nb_worker = ttk.Frame(nb)
-    nb.add(nb_worker, text='Workers')
+    nb_company = ec.ui.tk.company.create(nb)
+    nb_client = ec.ui.tk.client.create(nb)
+    nb_worker = ec.ui.tk.worker.create(nb)
     nb_tasktype = ttk.Frame(nb)
     nb.add(nb_tasktype, text='Task Types')
     nb_workday = ttk.Frame(nb)
     nb.add(nb_workday, text='Workdays')
-    nb_task = ttk.Frame(nb)
-    nb.add(nb_task, text='Tasks')
-
-    nb_worker.columnconfigure(0, weight=1)
-    nb_worker.rowconfigure(0, weight=1)
-    mt.tk.table.create({
-            'on_select': _on_select,#None,
-            'frame': nb_worker,
-            'sel_id': '34567890',#'',
-            'titles': ['Lastname', 'Firstname'],
-            'entries': collections.OrderedDict([
-                ('12345678', [ 'Müller', 'Hans-Werner' ]),
-                ('23456789', [ 'Niemandt', 'Agnés' ]),
-                ('34567890', [ 'Steinkopf', 'Svenjä' ])])
-        })
-
+    
     root.mainloop()
 
 #import tkinter.scrolledtext as st
