@@ -7,6 +7,7 @@ from tkinter import ttk
 import mt.str
 import mt.dt
 import mt.tk.table
+import mt.tk.input
 
 def _on_select(i):
     logging.debug('Entry with ID "'+i+'" selected.')
@@ -25,6 +26,7 @@ def create(p):
     right = ttk.Frame(frame)
     entries = collections.OrderedDict()
     data = p['read_all']()
+    titles = None
 
     left.grid(column=0, row=0, sticky=(ti.N, ti.S, ti.W, ti.E))
     right.grid(column=1, row=0, sticky=(ti.N, ti.S, ti.W, ti.E))
@@ -33,6 +35,8 @@ def create(p):
         entries[d['id']] = []
         for i in p['id_to_titles']:
             entries[d['id']].append(_prepare(d[i]))
+
+    titles = p['id_to_titles'].values()
 
     frame.columnconfigure(0, weight=1)
     frame.columnconfigure(1, weight=1)
@@ -48,8 +52,13 @@ def create(p):
             'on_select': _on_select,
             'frame': left,
             'sel_id': '',
-            'titles': p['id_to_titles'].values(),
+            'titles': titles,
             'entries': entries
+        })
+
+    mt.tk.input.create({
+            'frame': right,
+            'titles': titles
         })
 
     return None # Add useful return value?
