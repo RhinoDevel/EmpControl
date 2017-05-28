@@ -28,7 +28,6 @@ def _on_apply(input_o, update):
 
     update(d)
 
-
 def _prepare(d):
     if mt.str.is_str(d):
         return d
