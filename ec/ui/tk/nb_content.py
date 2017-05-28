@@ -6,6 +6,7 @@ from tkinter import ttk
 
 import mt.str
 import mt.dt
+import mt.tk
 import mt.tk.table_input
 
 def _on_select(i):
@@ -19,8 +20,7 @@ def _prepare(d):
     return str(d)
 
 def _recreate(p):
-    for widget in p['frame'].winfo_children():
-        widget.destroy()
+    mt.tk.clear_frame(p['frame'])
 
     mt.tk.table_input.create(p)
 
