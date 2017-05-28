@@ -27,5 +27,6 @@ def create(nb):
             ('company', 'Company'),
             ('lastname', 'Lastname'),
             ('firstname', 'Firstname')]),
-        'read_all': _read_all
+        'read_all': _read_all,
+        'update': ec.db.client.update_by_id
     })

@@ -11,5 +11,6 @@ def create(nb):
         'id_to_titles': collections.OrderedDict([
             ('lastname', 'Lastname'),
             ('firstname', 'Firstname')]),
-        'read_all': ec.db.worker.read_all
+        'read_all': ec.db.worker.read_all,
+        'update': ec.db.worker.update_by_id
     })
