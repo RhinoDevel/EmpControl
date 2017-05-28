@@ -12,16 +12,12 @@ def _get_sort_key(d):
 
 def _read_all():
     data = ec.db.client.read_all()
-    companies = ec.db.company.read_all() # Overdone
-    companies = ec.db.get_ordered_id_dict(companies)
+    companies = ec.db.get_ordered_id_dict(ec.db.company.read_all())
 
     for row in data:
         row['company'] = companies[row['company_id']]['title']
-        #del row['company_id']
 
-    data = sorted(data, key=_get_sort_key)
-    print(data)
-    return data
+    return sorted(data, key=_get_sort_key)
 
 def create(nb):
     return ec.ui.tk.nb_content.create({
