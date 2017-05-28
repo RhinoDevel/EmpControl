@@ -9,8 +9,15 @@ import mt.dt
 import mt.tk.table
 import mt.tk.input
 
-def _on_select(i):
+def _on_select(i, ordered_ids, entries, input_o):
     logging.debug('Entry with ID "'+i+'" selected.')
+
+    j = 0 # = Index of entries (equals index of ordered_ids).
+    for k in ordered_ids: # Set variable connected to input element.
+        input_o['var_and_eles'][k]['var'].set(entries[i][j])
+        j = j+1
+
+    mt.tk.input.set_enabled(input_o, True)
 
 def _prepare(d):
     if mt.str.is_str(d):
@@ -21,12 +28,12 @@ def _prepare(d):
 
 def create(p):
     frame = p['frame']
+    input_o = None
 
     left = ttk.Frame(frame)
     right = ttk.Frame(frame)
     entries = collections.OrderedDict()
     data = p['read_all']()
-    titles = None
 
     left.grid(column=0, row=0, sticky=(ti.N, ti.S, ti.W, ti.E))
     right.grid(column=1, row=0, sticky=(ti.N, ti.S, ti.W, ti.E))
@@ -35,8 +42,6 @@ def create(p):
         entries[d['id']] = []
         for i in p['id_to_titles']:
             entries[d['id']].append(_prepare(d[i]))
-
-    titles = p['id_to_titles'].values()
 
     frame.columnconfigure(0, weight=1)
     frame.columnconfigure(1, weight=1)
@@ -48,17 +53,21 @@ def create(p):
     right.columnconfigure(0, weight=1)
     right.rowconfigure(0, weight=1)
 
-    mt.tk.table.create({
-            'on_select': _on_select,
-            'frame': left,
-            'sel_id': '',
-            'titles': titles,
-            'entries': entries
+    input_o = mt.tk.input.create({
+            'frame': right,
+            'id_to_titles': p['id_to_titles']
         })
 
-    mt.tk.input.create({
-            'frame': right,
-            'titles': titles
+    mt.tk.table.create({
+            'on_select': lambda
+                i,
+                ordered_ids=p['id_to_titles'].keys(),
+                entries=entries,
+                input_o=input_o: _on_select(i, ordered_ids, entries, input_o),
+            'frame': left,
+            'sel_id': '',
+            'titles': p['id_to_titles'].values(),
+            'entries': entries
         })
 
     return None # Add useful return value?
