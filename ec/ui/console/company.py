@@ -7,6 +7,7 @@ menu_title = 'COMPANY'
 
 def _print():
     l = ec.db.company.read_all()
+    
     if not l:
         print('No entries.')
         return
