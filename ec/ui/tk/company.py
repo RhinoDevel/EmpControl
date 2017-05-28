@@ -10,5 +10,6 @@ def create(nb):
         'title': 'Companies',
         'id_to_titles': collections.OrderedDict([('title', 'Title')]),
         'read_all': ec.db.company.read_all,
-        'update': ec.db.company.update_by_id
+        'update': ec.db.company.update_by_id,
+        'create': ec.db.company.create
     })

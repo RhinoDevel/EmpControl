@@ -28,5 +28,6 @@ def create(nb):
             ('lastname', 'Lastname'),
             ('firstname', 'Firstname')]),
         'read_all': _read_all,
-        'update': ec.db.client.update_by_id
+        'update': ec.db.client.update_by_id,
+        'create': ec.db.client.create
     })

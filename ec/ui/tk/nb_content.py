@@ -28,6 +28,10 @@ def _update(d, p, update):
     update(d) # TODO: Add error handling.
     _recreate(p)
 
+def _create(d, p, create):
+    create(d) # TODO: Add error handling.
+    _recreate(p)
+
 def create(p):
     """Create notebook page content.
 
@@ -35,7 +39,8 @@ def create(p):
     """
 
     p['frame'] = ttk.Frame(p['nb'])
-    p['update'] = lambda d, p=p, update = p['update']: _update(d, p, update)
+    p['update'] = lambda d, p = p, update = p['update']: _update(d, p, update)
+    p['create'] = lambda d, p = p, create = p['create']: _create(d, p, create)
 
     _recreate(p)
 

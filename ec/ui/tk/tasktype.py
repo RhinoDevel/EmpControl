@@ -10,5 +10,6 @@ def create(nb):
         'title': 'Task Types',
         'id_to_titles': collections.OrderedDict([('title', 'Title')]),
         'read_all': ec.db.tasktype.read_all,
-        'update': ec.db.tasktype.update_by_id
+        'update': ec.db.tasktype.update_by_id,
+        'create': ec.db.tasktype.create
     })

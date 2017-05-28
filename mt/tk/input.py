@@ -88,6 +88,4 @@ def create(p):
     ttk.Style().configure('MTinput.TFrame', background=col_bg_input)
     o['frame'].configure(style='MTinput.TFrame')
 
-    set_enabled(o, False)
-
     return o

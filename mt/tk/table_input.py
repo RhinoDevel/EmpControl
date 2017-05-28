@@ -20,13 +20,18 @@ def _on_select(i, ordered_ids, entries, input_o):
     mt.tk.input.set_enabled(input_o, True)
     input_o['id'] = i
 
-def _on_apply(input_o, update):
-    d = { 'id': input_o['id'] }
+def _on_apply(input_o, update, create):
+    func = create
+    d = {}
+
+    if(input_o['id']):
+        func = update
+        d['id'] = input_o['id']
 
     for k, v in input_o['var_and_eles'].items():
         d[k] = v['var'].get()
 
-    update(d)
+    func(d)
 
 def _prepare(d):
     if mt.str.is_str(d):
@@ -68,7 +73,8 @@ def create(p):
             'id_to_titles': p['id_to_titles'],
             'on_apply': lambda
                 input_o_then,
-                update=p['update']: _on_apply(input_o_then, update)
+                update=p['update'],
+                create=p['create']: _on_apply(input_o_then, update, create)
         })
 
     table_o = mt.tk.table.create({
