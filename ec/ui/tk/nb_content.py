@@ -18,13 +18,19 @@ def _prepare(d):
         return d.strftime('%Y-%m-%d %H:%M')
     return str(d)
 
+def _update(d, update):
+    update(d) # TODO: Add error handling.
+    # TODO: Implement re-reading ALL from DB and updating UI.
+
 def create(p):
     """Create notebook page content.
 
-    Adds created frame to given parameters dictionary!
+    Alters given parameters dictionary!
     """
 
     p['frame'] = ttk.Frame(p['nb'])
+
+    p['update'] = lambda d, update = p['update']: _update(d, update)
 
     mt.tk.table_input.create(p)
 
