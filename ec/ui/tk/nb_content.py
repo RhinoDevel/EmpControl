@@ -6,7 +6,7 @@ from tkinter import ttk
 
 import mt.str
 import mt.dt
-import mt.tk.table
+import mt.tk.table_input
 
 def _on_select(i):
     logging.debug('Entry with ID "'+i+'" selected.')
@@ -19,23 +19,15 @@ def _prepare(d):
     return str(d)
 
 def create(p):
-    frame = ttk.Frame(p['nb'])
-    entries = collections.OrderedDict()
-    data = p['read_all']()
+    """Create notebook page content.
 
-    for d in data:
-        entries[d['id']] = []
-        for i in p['id_to_titles']:
-            entries[d['id']].append(_prepare(d[i]))
+    Adds created frame to given parameters dictionary!
+    """
 
-    p['nb'].add(frame, text=p['title'])
-    frame.columnconfigure(0, weight=1)
-    frame.rowconfigure(0, weight=1)
+    p['frame'] = ttk.Frame(p['nb'])
 
-    return mt.tk.table.create({
-            'on_select': _on_select,
-            'frame': frame,
-            'sel_id': '',
-            'titles': p['id_to_titles'].values(),
-            'entries': entries
-        })
+    mt.tk.table_input.create(p)
+
+    p['nb'].add(p['frame'], text=p['title'])
+
+    return None # Add useful return value?
