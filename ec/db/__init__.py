@@ -1,5 +1,7 @@
 
 import secrets
+import collections
+
 import mt.db
 
 id_byte_len = 4
@@ -7,6 +9,29 @@ id_byte_len = 4
 s_id_exists = 'SELECT COUNT(*) > 0 FROM {0} WHERE Id = %s'
 s_read_nr = 'SELECT Nr FROM {0} WHERE Id = %s'
 s_read_id = 'SELECT Id FROM {0} WHERE Nr = %s'
+
+def get_ordered_id_dict(data):
+    """Creates and returns an ordered dictionary with IDs as keys from given.
+
+    Expects a list holding dictionaries,
+    where each dictionary has a key "id" that will be used as key
+    for the to-be-returned ordered dictionary.
+
+    The returned ordered dictionary's values will not hold an "id" key.
+    The returned ordered dictionary will be ordered just like the given list.
+    """
+
+    ret_val = collections.OrderedDict()
+
+    for row in data:
+        ret_val[row['id']] = {}
+
+        for col_k, col_v in row.items():
+            if col_k=='id':
+                continue
+            ret_val[row['id']][col_k] = col_v
+            
+    return ret_val
 
 def create_id(tablename):
     ret_val = None
