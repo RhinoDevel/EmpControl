@@ -5,8 +5,8 @@ from tkinter import ttk
 
 border_cell = 5
 pad_table = 5
-col_bg_table = ''
-col_bg_row_deselected = ''
+col_bg_table = 'blue'
+col_bg_row_deselected = 'red'
 col_bg_row_selected = 'yellow'
 
 # TODO: Implement scrolling.
@@ -89,7 +89,7 @@ def create(p):
     if sel_row!=-1:
         _select_wo_call(o, o['sel_id'], sel_row)
 
-    ttk.Style().configure('MT.TFrame', background=col_bg_table)
-    o['frame'].configure(style='MT.TFrame')
+    ttk.Style().configure('MTtable.TFrame', background=col_bg_table)
+    o['frame'].configure(style='MTtable.TFrame')
 
     return o
