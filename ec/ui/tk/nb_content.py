@@ -18,9 +18,15 @@ def _prepare(d):
         return d.strftime('%Y-%m-%d %H:%M')
     return str(d)
 
-def _update(d, update):
+def _recreate(p):
+    for widget in p['frame'].winfo_children():
+        widget.destroy()
+
+    mt.tk.table_input.create(p)
+
+def _update(d, p, update):
     update(d) # TODO: Add error handling.
-    # TODO: Implement re-reading ALL from DB and updating UI.
+    _recreate(p)
 
 def create(p):
     """Create notebook page content.
@@ -29,10 +35,9 @@ def create(p):
     """
 
     p['frame'] = ttk.Frame(p['nb'])
+    p['update'] = lambda d, p=p, update = p['update']: _update(d, p, update)
 
-    p['update'] = lambda d, update = p['update']: _update(d, update)
-
-    mt.tk.table_input.create(p)
+    _recreate(p)
 
     p['nb'].add(p['frame'], text=p['title'])
 
