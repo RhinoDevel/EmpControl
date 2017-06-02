@@ -9,6 +9,12 @@ import mt.dt
 import mt.tk.table
 import mt.tk.input
 
+def _on_deselect(i, ordered_ids, input_o):
+    for k in ordered_ids: # Set variable connected to input element.
+        input_o['var_and_eles'][k]['var'].set('') # TODO: Hard-coded for str!
+
+    input_o['id'] = '' # Hard-coded
+
 def _on_select(i, ordered_ids, entries, input_o):
     logging.debug('Entry with ID "'+i+'" selected.')
 
@@ -17,7 +23,6 @@ def _on_select(i, ordered_ids, entries, input_o):
         input_o['var_and_eles'][k]['var'].set(entries[i][j])
         j = j+1
 
-    mt.tk.input.set_enabled(input_o, True)
     input_o['id'] = i
 
 def _on_apply(input_o, update, create):
@@ -78,6 +83,10 @@ def create(p):
         })
 
     table_o = mt.tk.table.create({
+            'on_deselect': lambda
+                i,
+                ordered_ids=p['id_to_titles'].keys(),
+                input_o=input_o: _on_deselect(i, ordered_ids, input_o),
             'on_select': lambda
                 i,
                 ordered_ids=p['id_to_titles'].keys(),
