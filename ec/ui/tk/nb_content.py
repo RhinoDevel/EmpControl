@@ -32,6 +32,11 @@ def _create(d, p, create):
     create(d) # TODO: Add error handling.
     _recreate(p)
 
+def _delete(i, p, delete):
+    # TODO: Add modal dialog asking user, if deletion is really wanted.
+    delete(i) # TODO: Add error handling.
+    _recreate(p)
+
 def create(p):
     """Create notebook page content.
 
@@ -41,6 +46,7 @@ def create(p):
     p['frame'] = ttk.Frame(p['nb'])
     p['update'] = lambda d, p = p, update = p['update']: _update(d, p, update)
     p['create'] = lambda d, p = p, create = p['create']: _create(d, p, create)
+    p['delete'] = lambda i, p = p, delete = p['delete']: _delete(i, p, delete)
 
     _recreate(p)
 

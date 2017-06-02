@@ -38,6 +38,9 @@ def _on_apply(input_o, update, create):
 
     func(d)
 
+def _on_delete(i, delete):
+    delete(i)
+
 def _prepare(d):
     if mt.str.is_str(d):
         return d
@@ -92,6 +95,9 @@ def create(p):
                 ordered_ids=p['id_to_titles'].keys(),
                 entries=entries,
                 input_o=input_o: _on_select(i, ordered_ids, entries, input_o),
+            'on_delete': lambda
+                i,
+                delete=p['delete']: _on_delete(i, delete),
             'frame': left,
             'sel_id': '',
             'titles': p['id_to_titles'].values(),

@@ -13,5 +13,6 @@ def create(nb):
             ('firstname', 'Firstname')]),
         'read_all': ec.db.worker.read_all,
         'update': ec.db.worker.update_by_id,
-        'create': ec.db.worker.create
+        'create': ec.db.worker.create,
+        'delete': ec.db.worker.delete_by_id
     })
