@@ -9,6 +9,8 @@ class CellType(Enum):
     delete = 2
     text = 3
 
+cell_text_avg_char_width = 16 # In average character width.
+cell_but_avg_char_width = 1 # In average character width.
 border_cell = 5
 pad_table = 5
 col_bg_table = 'blue'
@@ -60,30 +62,36 @@ def _on_click_row(o, i, r, e):
     _select_toggle(o, i, r)
 
 def _add_cell(o, col, row, i, text, cell_type):
-    is_text_or_title = cell_type==CellType.title or cell_type==CellType.text
+    is_title = cell_type==CellType.title
+    is_text = cell_type==CellType.text
     ele = None
+    width = -1
 
-    if is_text_or_title:
+    if is_title or is_text:
+        width = cell_text_avg_char_width
+        if is_title and col==0: # Delete button.
+            width = cell_but_avg_char_width
+
         ele = ttk.Label(
             o['frame'],
             text=text,
-            border=border_cell)
+            border=border_cell,
+            width=width)
     else: # Assuming CellType.delete.
+        width = cell_but_avg_char_width
         ele = ti.Frame(o['frame'])
         #ele.columnconfigure(0, weight=1)
         #ele.rowconfigure(0, weight=1)
         but = ttk.Button(
             ele,
             text='d', # TODO: Replace with icon.
-            width=-1,
+            width=width,
             command=lambda i=i, o=o: _on_delete(o, i))
         but.grid(column=0, row=0)
 
     ele.grid(column=col, row=row, sticky=(ti.N, ti.S, ti.W, ti.E))
 
-    if cell_type==CellType.title:
-        ele.configure(font='bold')
-    elif cell_type==CellType.text:
+    if is_text:
         ele.bind(
             "<Button-1>", lambda e, i=i, o=o, r=row: _on_click_row(o, i, r, e))
 
