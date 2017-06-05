@@ -1,4 +1,5 @@
 
+from tkinter import ttk
 import tkinter as ti
 
 def _on_frame_conf(canvas):
@@ -6,7 +7,7 @@ def _on_frame_conf(canvas):
 
 def get_vertical_scrollbar_frame(frame):
     canvas = ti.Canvas(frame, highlightthickness=0)
-    inner = ti.Frame(canvas)
+    inner = ttk.Frame(canvas)
     v_scrollbar = ti.Scrollbar(frame, orient='vertical', command=canvas.yview)
 
     canvas.configure(yscrollcommand=v_scrollbar.set)
