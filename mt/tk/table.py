@@ -68,6 +68,7 @@ def _add_cell(o, col, row, i, text, cell_type):
     is_text = cell_type==CellType.text
     ele = None
     width = -1
+    frame = o['frame_title'] if is_title else o['frame_data']
 
     if is_title or is_text:
         width = cell_text_avg_char_width
@@ -75,13 +76,13 @@ def _add_cell(o, col, row, i, text, cell_type):
             width = cell_but_avg_char_width
 
         ele = ttk.Label(
-            o['frame'],
+            frame,
             text=text,
             border=border_cell,
             width=width)
     else: # Assuming CellType.delete.
         width = cell_but_avg_char_width
-        ele = ti.Frame(o['frame'])
+        ele = ti.Frame(frame)
         #ele.columnconfigure(0, weight=1)
         #ele.rowconfigure(0, weight=1)
         but = ttk.Button(
@@ -127,18 +128,34 @@ def _add_row(o, row, i, texts, are_titles):
 def create(p):
     o = {
         'frame': ttk.Frame(p['frame']),
+        'frame_title': None, # See below.
+        'frame_data': None, # See below.
         'on_deselect': p['on_deselect'],
         'on_select': p['on_select'],
         'on_delete': p['on_delete'],
         'ele': [],
         'sel_id': p['sel_id']
     }
+    o['frame_title'] = ttk.Frame(o['frame'])
+    o['frame_data'] = ttk.Frame(o['frame'])
 
     o['frame'].grid(
         column=0,
         row=0,
         padx=pad_table,
         pady=pad_table,
+        sticky=(ti.N, ti.S, ti.W, ti.E))
+    o['frame_title'].grid(
+        column=0,
+        row=0,
+        padx=0,
+        pady=0,
+        sticky=(ti.N, ti.S, ti.W, ti.E))
+    o['frame_data'].grid(
+        column=0,
+        row=1,
+        padx=0,
+        pady=0,
         sticky=(ti.N, ti.S, ti.W, ti.E))
 
     row = 0
