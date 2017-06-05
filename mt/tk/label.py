@@ -31,7 +31,7 @@ def get_ellipsis_text(label, text):
     while get_text_pix_len(label, buf)>lablen:
         index = len(buf)-ellipsis_len-1
         buf = buf[:index]+buf[index+1:]
-        print(str(get_text_pix_len(label, buf))+' '+str(lablen)+' '+buf)
+        #print(str(get_text_pix_len(label, buf))+' '+str(lablen)+' '+buf)
         if len(buf)<=ellipsis_len:
             return ellipsis
 
