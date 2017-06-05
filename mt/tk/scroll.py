@@ -5,7 +5,7 @@ def _on_frame_conf(canvas):
     canvas.configure(scrollregion=canvas.bbox('all'))
 
 def get_vertical_scrollbar_frame(frame):
-    canvas = ti.Canvas(frame)
+    canvas = ti.Canvas(frame, highlightthickness=0)
     inner = ti.Frame(canvas)
     v_scrollbar = ti.Scrollbar(frame, orient='vertical', command=canvas.yview)
 
