@@ -4,6 +4,8 @@ from enum import Enum
 import tkinter as ti
 from tkinter import ttk
 
+import mt.tk.label
+
 class CellType(Enum):
     title = 1
     delete = 2
@@ -94,6 +96,8 @@ def _add_cell(o, col, row, i, text, cell_type):
     if is_text:
         ele.bind(
             "<Button-1>", lambda e, i=i, o=o, r=row: _on_click_row(o, i, r, e))
+        ele.update() # For next function to work.
+        ele['text'] = mt.tk.label.get_ellipsis_text(ele, ele['text'])
 
     ele.configure(background=col_bg_row_deselected)
 
