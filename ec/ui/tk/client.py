@@ -24,9 +24,9 @@ def create(nb):
         'nb': nb,
         'title': 'Clients',
         'id_to_data': collections.OrderedDict([
-            ('company', {'title': 'Company'}),
-            ('lastname', {'title': 'Lastname'}),
-            ('firstname', {'title': 'Firstname'})]),
+            ('company', {'title': 'Company', 'type': 'str'}), # TODO: Use combobox.
+            ('lastname', {'title': 'Lastname', 'type': 'str'}),
+            ('firstname', {'title': 'Firstname', 'type': 'str'})]),
         'read_all': _read_all,
         'update': ec.db.client.update_by_id,
         'create': ec.db.client.create,

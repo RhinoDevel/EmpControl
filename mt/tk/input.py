@@ -3,30 +3,53 @@ import tkinter as ti
 from tkinter import ttk
 
 border_title = 5
-pad_entry = 5
+pad_ele = 5
 pad_but = 5
 pad_input = 5
 col_bg_input = 'green'
 but_text = 'Apply'
 
-def _add_row(f, i, title, r):
+def _combobox_on_selected(e, o):
+    index = o['ele'].current()
+    if index==-1:
+        o['var'].set('')
+    else:
+        o['var'].set(o['values'][index])
+
+    print(o['var'].get())
+
+def _add_row(f, i, data, r):
     ret_val = {
-        'var': ti.StringVar(),
+        'var': None, # See below.
         'ele': None # See below.
     }
 
-    label = ttk.Label(f, text=title+':', border=border_title)
+    label = ttk.Label(
+        f, text=data['title']+':', border=border_title)
     label.grid(column=0, row=r, sticky=(ti.N, ti.S, ti.W, ti.E))
     label.configure(font='bold')
 
-    # TODO: Add more than string input.
+    if data['type']=='str':
+        ret_val['var'] = ti.StringVar()
+        ret_val['ele'] = ttk.Entry(f, textvariable=ret_val['var'])
+    elif data['type']=='sel':
+        ret_val['values'] = data['values']
+        ret_val['var'] = ti.StringVar()
+        ret_val['ele'] = ttk.Combobox(
+            f,
+            values=data['titles'],
+            state='readonly')
+        ret_val['ele'].bind(
+            '<<ComboboxSelected>>',
+            lambda e, o=ret_val: _combobox_on_selected(e, o))
     #
-    ret_val['ele'] = ttk.Entry(f, textvariable=ret_val['var'])
+    # Otherwise: Error!
+
     ret_val['ele'].grid(
         column=1,
         row=r,
-        padx=pad_entry,
-        pady=pad_entry,
+        padx=pad_ele,
+        pady=pad_ele,
         sticky=(ti.N, ti.S, ti.W, ti.E))
 
     return ret_val
@@ -36,7 +59,7 @@ def _add_rows(f, id_to_data):
     r = 0
 
     for i, data in id_to_data.items():
-        ret_val[i] = _add_row(f, i, data['title'], r)
+        ret_val[i] = _add_row(f, i, data, r)
         r = r+1
 
     return ret_val

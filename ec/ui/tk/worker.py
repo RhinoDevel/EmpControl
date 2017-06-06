@@ -9,8 +9,8 @@ def create(nb):
         'nb': nb,
         'title': 'Workers',
         'id_to_data': collections.OrderedDict([
-            ('lastname', {'title': 'Lastname'}),
-            ('firstname', {'title': 'Firstname'})]),
+            ('lastname', {'title': 'Lastname', 'type': 'str'}),
+            ('firstname', {'title': 'Firstname', 'type': 'str'})]),
         'read_all': ec.db.worker.read_all,
         'update': ec.db.worker.update_by_id,
         'create': ec.db.worker.create,

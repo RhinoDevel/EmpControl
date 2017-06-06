@@ -8,7 +8,8 @@ def create(nb):
     return ec.ui.tk.nb_content.create({
         'nb': nb,
         'title': 'Companies',
-        'id_to_data': collections.OrderedDict([('title', {'title': 'Title'})]),
+        'id_to_data': collections.OrderedDict([
+            ('title', {'title': 'Title', 'type': 'str'})]),
         'read_all': ec.db.company.read_all,
         'update': ec.db.company.update_by_id,
         'create': ec.db.company.create,
