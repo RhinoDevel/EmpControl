@@ -20,7 +20,10 @@ def get_text_pix_len(label, text):
 def get_ellipsis_text(label, text):
     buf = None
     borderlen = 2*label['border'] if label['border'] else 2 # Hard-coded 2.
-    lablen = label.winfo_width()-borderlen
+
+    # Maybe better: Use label.winfo_width() and call .update_idletasks() before.
+    #
+    lablen = label.winfo_reqwidth()-borderlen
     index = -1
 
     if get_text_pix_len(label, text)<=lablen:
