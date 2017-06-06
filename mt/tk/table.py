@@ -98,10 +98,18 @@ def _add_cell(o, col, row, i, text, cell_type):
     if is_text:
         ele.bind(
             "<Button-1>", lambda e, i=i, o=o, r=row: _on_click_row(o, i, r, e))
-        ele.update() # For next function to work.
+
+        # Not necessary, as long as .get_ellipsis_text() uses .winfo_reqwidth():
+        #
+        #ele.update_idletasks()
+
         ele['text'] = mt.tk.label.get_ellipsis_text(ele, ele['text'])
     elif is_del and cell_but_pix_width==-1:
-        ele.update() # For next function to work.
+        # For next function to work
+        # [.winfo_reqwidth() is not enough]:
+        #
+        ele.update_idletasks()
+
         cell_but_pix_width = ele.winfo_width()
 
     ele.configure(background=col_bg_row_deselected)
