@@ -12,13 +12,6 @@ import mt.tk.table_input
 def _on_select(i):
     logging.debug('Entry with ID "'+i+'" selected.')
 
-def _prepare(d):
-    if mt.str.is_str(d):
-        return d
-    if mt.dt.is_dt(d):
-        return d.strftime('%Y-%m-%d %H:%M')
-    return str(d)
-
 def _recreate(p):
     mt.tk.clear_frame(p['frame'])
 
