@@ -23,10 +23,10 @@ def create(nb):
     return ec.ui.tk.nb_content.create({
         'nb': nb,
         'title': 'Clients',
-        'id_to_titles': collections.OrderedDict([
-            ('company', 'Company'),
-            ('lastname', 'Lastname'),
-            ('firstname', 'Firstname')]),
+        'id_to_data': collections.OrderedDict([
+            ('company', {'title': 'Company'}),
+            ('lastname', {'title': 'Lastname'}),
+            ('firstname', {'title': 'Firstname'})]),
         'read_all': _read_all,
         'update': ec.db.client.update_by_id,
         'create': ec.db.client.create,

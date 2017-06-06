@@ -8,9 +8,9 @@ def create(nb):
     return ec.ui.tk.nb_content.create({
         'nb': nb,
         'title': 'Workers',
-        'id_to_titles': collections.OrderedDict([
-            ('lastname', 'Lastname'),
-            ('firstname', 'Firstname')]),
+        'id_to_data': collections.OrderedDict([
+            ('lastname', {'title': 'Lastname'}),
+            ('firstname', {'title': 'Firstname'})]),
         'read_all': ec.db.worker.read_all,
         'update': ec.db.worker.update_by_id,
         'create': ec.db.worker.create,

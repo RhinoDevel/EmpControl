@@ -31,12 +31,12 @@ def _add_row(f, i, title, r):
 
     return ret_val
 
-def _add_rows(f, id_to_titles):
+def _add_rows(f, id_to_data):
     ret_val = {}
     r = 0
 
-    for i, title in id_to_titles.items():
-        ret_val[i] = _add_row(f, i, title, r)
+    for i, data in id_to_data.items():
+        ret_val[i] = _add_row(f, i, data['title'], r)
         r = r+1
 
     return ret_val
@@ -64,6 +64,13 @@ def set_enabled(o, is_enabled):
     o['but'].configure(state=state)
 
 def create(p):
+    """Create input element.
+
+    p: # Dictionary.
+        frame # To be filled.
+        id_to_data # Ordered dictionary of dictionaries.
+        on_apply # Function.
+    """
     o = {
         'frame': ttk.Frame(p['frame']),
         'id': '',
@@ -78,11 +85,11 @@ def create(p):
         pady=pad_input,
         sticky=(ti.N, ti.S, ti.W, ti.E))
 
-    o['var_and_eles'] = _add_rows(o['frame'], p['id_to_titles'])
+    o['var_and_eles'] = _add_rows(o['frame'], p['id_to_data'])
 
     o['but'] = _add_but(
         o['frame'],
-        len(p['id_to_titles']),
+        len(p['id_to_data']),
         lambda o=o: p['on_apply'](o))
 
     ttk.Style().configure('MTinput.TFrame', background=col_bg_input)

@@ -63,7 +63,7 @@ def create(p):
 
     for d in data:
         entries[d['id']] = []
-        for i in p['id_to_titles']:
+        for i in p['id_to_data']:
             entries[d['id']].append(_prepare(d[i]))
 
     frame.columnconfigure(0, weight=1)
@@ -78,7 +78,7 @@ def create(p):
 
     input_o = mt.tk.input.create({
             'frame': right,
-            'id_to_titles': p['id_to_titles'],
+            'id_to_data': p['id_to_data'],
             'on_apply': lambda
                 input_o_then,
                 update=p['update'],
@@ -88,11 +88,11 @@ def create(p):
     table_o = mt.tk.table.create({
             'on_deselect': lambda
                 i,
-                ordered_ids=p['id_to_titles'].keys(),
+                ordered_ids=p['id_to_data'].keys(),
                 input_o=input_o: _on_deselect(i, ordered_ids, input_o),
             'on_select': lambda
                 i,
-                ordered_ids=p['id_to_titles'].keys(),
+                ordered_ids=p['id_to_data'].keys(),
                 entries=entries,
                 input_o=input_o: _on_select(i, ordered_ids, entries, input_o),
             'on_delete': lambda
@@ -100,7 +100,7 @@ def create(p):
                 delete=p['delete']: _on_delete(i, delete),
             'frame': left,
             'sel_id': '',
-            'titles': p['id_to_titles'].values(),
+            'titles': map(lambda d: d['title'],p['id_to_data'].values()),
             'entries': entries
         })
 
