@@ -11,7 +11,7 @@ import mt.tk.input
 
 def _on_deselect(i, ordered_ids, input_o):
     for k in ordered_ids: # Set variable connected to input element.
-        input_o['var_and_eles'][k]['var'].set('') # TODO: Hard-coded for str!
+        input_o['var_and_eles'][k]['clear']()
 
     input_o['id'] = '' # Hard-coded
 
@@ -20,7 +20,7 @@ def _on_select(i, ordered_ids, entries, input_o):
 
     j = 0 # = Index of entries (equals index of ordered_ids).
     for k in ordered_ids: # Set variable connected to input element.
-        input_o['var_and_eles'][k]['var'].set(entries[i][j])
+        input_o['var_and_eles'][k]['set'](i, entries[i][j])
         j = j+1
 
     input_o['id'] = i

@@ -1,4 +1,6 @@
 
+# TODO: Fix BUG: 1) Create new entry. 2) Select new entry. => ERROR!
+
 import collections
 import operator
 
@@ -19,12 +21,41 @@ def _read_all():
 
     return sorted(data, key=_get_sort_key)
 
+def _get_val_from_id(i, d):
+    # Probably a stupid way to do this:
+    #
+    for e in d:
+        if e['id']==i:
+            return e['company_id']
+
+    return None # Must not happen.
+
 def create(nb):
+    # Get data for company select:
+    #
+    data = _read_all()
+    company_values = []
+    company_titles = []
+    for e in data:
+        if e['company_id'] in company_values:
+            continue;
+        company_values.append(e['company_id'])
+        company_titles.append(e['company'])
+
     return ec.ui.tk.nb_content.create({
         'nb': nb,
         'title': 'Clients',
         'id_to_data': collections.OrderedDict([
-            ('company', {'title': 'Company', 'type': 'str'}), # TODO: Use combobox.
+            (
+                'company_id', # TODO: Fix this!
+                {
+                    'title': 'Company',
+                    'type': 'sel',
+                    'values': company_values,
+                    'titles': company_titles,
+                    'get_val_from_id': lambda i, d=data: _get_val_from_id(i, d)
+                }
+            ),
             ('lastname', {'title': 'Lastname', 'type': 'str'}),
             ('firstname', {'title': 'Firstname', 'type': 'str'})]),
         'read_all': _read_all,

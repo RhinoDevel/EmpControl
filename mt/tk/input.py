@@ -2,6 +2,8 @@
 import tkinter as ti
 from tkinter import ttk
 
+import mt.str
+
 border_title = 5
 pad_ele = 5
 pad_but = 5
@@ -16,7 +18,30 @@ def _combobox_on_selected(e, o):
     else:
         o['var'].set(o['values'][index])
 
-    print(o['var'].get())
+def _combobox_get_index(i, o):
+    if not mt.str.is_nonwhitespace(i):
+        return 0#-1
+
+    val = o['get_val_from_id'](i)
+
+    return o['values'].index(val)
+
+def _combobox_set(i, o):
+    cur_index = o['ele'].current()
+    index = _combobox_get_index(i, o)
+    if cur_index==index:
+        return
+    o['ele'].current(index)
+    _combobox_on_selected(None, o)
+
+def _combobox_clear(o):
+    _combobox_set('', o)
+
+def _str_set(val, o):
+    o['var'].set(val)
+
+def _str_clear(o):
+    _str_set('', o)
 
 def _add_row(f, i, data, r):
     ret_val = {
@@ -32,6 +57,8 @@ def _add_row(f, i, data, r):
     if data['type']=='str':
         ret_val['var'] = ti.StringVar()
         ret_val['ele'] = ttk.Entry(f, textvariable=ret_val['var'])
+        ret_val['set'] = lambda i, v, o=ret_val: _str_set(v, o)
+        ret_val['clear'] = lambda o=ret_val: _str_clear(o)
     elif data['type']=='sel':
         ret_val['values'] = data['values']
         ret_val['var'] = ti.StringVar()
@@ -39,6 +66,10 @@ def _add_row(f, i, data, r):
             f,
             values=data['titles'],
             state='readonly')
+        ret_val['set'] = lambda i, v, o=ret_val: _combobox_set(i, o)
+        ret_val['clear'] = lambda o=ret_val: _combobox_clear(o)
+        ret_val['get_val_from_id'] = data['get_val_from_id']
+
         ret_val['ele'].bind(
             '<<ComboboxSelected>>',
             lambda e, o=ret_val: _combobox_on_selected(e, o))
