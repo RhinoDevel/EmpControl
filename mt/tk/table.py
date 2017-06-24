@@ -20,8 +20,6 @@ pad_table = 5
 col_bg_row_deselected = ''
 col_bg_row_selected = 'yellow'
 
-# TODO: Implement scrolling.
-
 def _deselect_row(o, r):
     for col_ele in o['ele'][r]:
         col_ele.configure(background=col_bg_row_deselected)
