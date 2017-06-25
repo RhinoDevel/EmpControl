@@ -90,7 +90,11 @@ def _add_rows(f, id_to_data):
     r = 0
 
     for i, data in id_to_data.items():
-        ret_val[i] = _add_row(f, i, data, r)
+        k = i
+        if 'val_id' in data:
+            k = data['val_id']
+
+        ret_val[k] = _add_row(f, i, data, r)
         r = r+1
 
     return ret_val

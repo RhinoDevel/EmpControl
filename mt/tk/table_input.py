@@ -48,6 +48,15 @@ def _prepare(d):
         return d.strftime('%Y-%m-%d %H:%M')
     return str(d)
 
+def _get_ordered_val_ids(id_to_data):
+    ret_val = []
+    for k, v in id_to_data.items():
+        if 'val_id' in v:
+            ret_val.append(v['val_id'])
+        else:
+            ret_val.append(k)
+    return ret_val
+
 def create(p):
     frame = p['frame']
     input_o = None
@@ -57,6 +66,7 @@ def create(p):
     right = ttk.Frame(frame)
     entries = collections.OrderedDict()
     data = p['read_all']()
+    ordered_val_ids = _get_ordered_val_ids(p['id_to_data'])
 
     left.grid(column=0, row=0, sticky=(ti.N, ti.S, ti.W, ti.E))
     right.grid(column=1, row=0, sticky=(ti.N, ti.S, ti.W, ti.E))
@@ -88,11 +98,11 @@ def create(p):
     table_o = mt.tk.table.create({
             'on_deselect': lambda
                 i,
-                ordered_ids=p['id_to_data'].keys(),
+                ordered_ids=ordered_val_ids,
                 input_o=input_o: _on_deselect(i, ordered_ids, input_o),
             'on_select': lambda
                 i,
-                ordered_ids=p['id_to_data'].keys(),
+                ordered_ids=ordered_val_ids,
                 entries=entries,
                 input_o=input_o: _on_select(i, ordered_ids, entries, input_o),
             'on_delete': lambda
