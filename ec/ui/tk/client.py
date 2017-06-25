@@ -51,13 +51,14 @@ def create(nb):
         'title': 'Clients',
         'id_to_data': collections.OrderedDict([
             (
-                'company_id', # TODO: Fix this!
+                'company',
                 {
                     'title': 'Company',
                     'type': 'sel',
                     'values': company_values,
                     'titles': company_titles,
-                    'get_val_from_id': _get_val_from_id
+                    'get_val_from_id': _get_val_from_id,
+                    'val_id': 'company_id'
                 }
             ),
             ('lastname', {'title': 'Lastname', 'type': 'str'}),
