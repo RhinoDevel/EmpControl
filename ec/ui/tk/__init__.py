@@ -32,8 +32,8 @@ def menu():
     nb = ttk.Notebook(mainframe)
     nb.grid(column=0, row=0, padx=5, pady=5, sticky=(ti.N, ti.S, ti.W, ti.E))
 
-    nb_company = ec.ui.tk.company.create(nb)
     nb_client = ec.ui.tk.client.create(nb)
+    nb_company = ec.ui.tk.company.create(nb, nb_client['recreate'])
     nb_worker = ec.ui.tk.worker.create(nb)
     nb_tasktype = ec.ui.tk.tasktype.create(nb)
     nb_workday = ttk.Frame(nb)
