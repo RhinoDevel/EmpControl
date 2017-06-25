@@ -100,7 +100,7 @@ def create(p):
                 delete=p['delete']: _on_delete(i, delete),
             'frame': left,
             'sel_id': '',
-            'titles': map(lambda d: d['title'],p['id_to_data'].values()),
+            'titles': list(map(lambda d: d['title'],p['id_to_data'].values())),
             'entries': entries
         })
 
