@@ -8,20 +8,36 @@ import ec.db.company
 import ec.ui.tk.nb_content
 
 last_data = None
+last_company_values = []
+last_company_titles = []
 
 def _get_sort_key(d):
     return (d['company'], d['lastname'], d['firstname'])
 
 def _read_all():
     global last_data
-    last_data = ec.db.client.read_all()
+    global last_company_values
+    global last_company_titles
 
+    last_data = ec.db.client.read_all()
+    del last_company_values[:]
+    del last_company_titles[:]
     companies = ec.db.get_ordered_id_dict(ec.db.company.read_all())
 
     for row in last_data:
         row['company'] = companies[row['company_id']]['title']
 
-    return sorted(last_data, key=_get_sort_key)
+    last_data = sorted(last_data, key=_get_sort_key)
+
+    # Update company select data:
+    #
+    for k, v in companies.items():
+        if k in last_company_values:
+            continue;
+        last_company_values.append(k)
+        last_company_titles.append(v['title'])
+
+    return last_data
 
 def _get_val_from_id(i):
     # Probably a stupid way to do this:
@@ -36,15 +52,9 @@ def create(nb):
     # Get data for company select:
     #
     global last_data
-    last_data = _read_all()
-    #
-    company_values = []
-    company_titles = []
-    for e in last_data:
-        if e['company_id'] in company_values:
-            continue;
-        company_values.append(e['company_id'])
-        company_titles.append(e['company'])
+    global last_company_values
+    global last_company_titles
+    last_data = _read_all() # Also updates last_... variables.
 
     return ec.ui.tk.nb_content.create({
         'nb': nb,
@@ -55,8 +65,8 @@ def create(nb):
                 {
                     'title': 'Company',
                     'type': 'sel',
-                    'values': company_values,
-                    'titles': company_titles,
+                    'values': last_company_values,
+                    'titles': last_company_titles,
                     'get_val_from_id': _get_val_from_id,
                     'val_id': 'company_id'
                 }
