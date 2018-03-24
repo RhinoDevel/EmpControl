@@ -1,9 +1,16 @@
 
-# sudo systemctl start postgresql
+# Windows:
+#
+# python -m pip install --upgrade pip
+# python -m pip install psycopg2
 
+# Linux (Manjaro):
+#
+# sudo systemctl start postgresql
+#
 # pip install -U pip
 # pip install psycopg2
-#
+
 import psycopg2
 
 dbname = 'mtdatabase'
