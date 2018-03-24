@@ -2,6 +2,7 @@
 import collections
 import ec.db.client
 import ec.ui.console
+import mt.help
 
 menu_title = 'CLIENT'
 
@@ -11,11 +12,16 @@ def _print():
         print('No entries.')
         return
 
-    print('ID      ' + ' | ' + 'Company ID' + ' | ' + 'Lastname' + ', ' + 'Firstname')
+    c = ec.db.company.read_all()
+
+    print('ID      ' + ' | ' + 'Company ID' + ' | ' + 'Company Title' + ', ' + 'Lastname' + ', ' + 'Firstname')
     print('--------' + '---' + '----------' + '---')
     for v in l:
+        i = mt.help.get_first_dict_index(c, 'id', v['company_id'])
+
         print(v['id'], end=' | ')
         print(v['company_id'], end='   | ')
+        print(c[i]['title'], end=', ')
         print(v['lastname'], end=', ')
         print(v['firstname'])
 
