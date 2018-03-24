@@ -26,6 +26,8 @@ def _print():
         print(v['firstname'])
 
 def _create():
+    ec.ui.console.company.print_with_title()
+    
     ec.ui.console.create(
         {
             'title': menu_title,
