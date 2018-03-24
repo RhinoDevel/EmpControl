@@ -7,7 +7,7 @@ menu_title = 'COMPANY'
 
 def _print():
     l = ec.db.company.read_all()
-    
+
     if not l:
         print('No entries.')
         return
@@ -43,6 +43,10 @@ def _delete():
             'title': menu_title,
             'func': ec.db.company.delete_by_id
         })
+
+def print_with_title():
+    print('***' + ' ' + menu_title + ' ' + '***')
+    _print()
 
 def menu():
     ec.ui.console.enter_menu(
