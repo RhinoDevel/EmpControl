@@ -12,7 +12,7 @@ s_create = ('INSERT INTO ' + tablename
            + ' (Id, Worker_nr, Begin_at, End_at, Break, Vacation, Sick)'
            + ' VALUES (%s, %s, %s, %s, %s, %s , %s) RETURNING Nr')
 s_read_by_id = ('SELECT Nr, Id, Worker_nr, Begin_at, End_at'
-               +', Break, Vacation, Sick FROM' + tablename + ' WHERE Id = %s')
+               +', Break, Vacation, Sick FROM ' + tablename + ' WHERE Id = %s')
 s_update_by_id = ('UPDATE ' + tablename + ' SET Worker_nr = %s, Begin_at = %s'
                  +', End_at = %s, Break = %s, Vacation = %s, Sick = %s'
                  + ' WHERE Id = %s')
