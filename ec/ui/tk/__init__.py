@@ -8,6 +8,7 @@ import ec.ui.tk.company
 import ec.ui.tk.client
 import ec.ui.tk.worker
 import ec.ui.tk.tasktype
+import ec.ui.tk.workday
 
 def menu():
     root = None
@@ -36,8 +37,7 @@ def menu():
     nb_company = ec.ui.tk.company.create(nb, nb_client['recreate'])
     nb_worker = ec.ui.tk.worker.create(nb)
     nb_tasktype = ec.ui.tk.tasktype.create(nb)
-    nb_workday = ttk.Frame(nb)
-    nb.add(nb_workday, text='Workdays')
+    nb_workday = ec.ui.tk.workday.create(nb)
 
     root.mainloop()
 
