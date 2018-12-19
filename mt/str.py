@@ -12,3 +12,18 @@ def read_file(path):
 
     with open(path, 'r') as f:
         return f.read()
+
+def get_name_str(lastname, firstname):
+    buf = None
+
+    if is_nonwhitespace(lastname):
+        buf = lastname.strip()
+        if is_nonwhitespace(firstname):
+            return buf + ', ' + firstname.strip()
+        else:
+            return buf
+    else:
+        if is_nonwhitespace(firstname):
+            return firstname
+        else:
+            return ''
