@@ -12,6 +12,7 @@
 # pip install psycopg2
 
 import psycopg2
+import logging
 
 dbname = 'mtdatabase'
 user = 'mtuser'
@@ -73,6 +74,8 @@ def write(query, params=None):
 
 def read_all(query, params=None):
     """Return all entries read."""
+
+    logging.debug('mt.db.read_all: Query = "' + query + '".')
 
     retVal = None
     conn = _get_conn()
